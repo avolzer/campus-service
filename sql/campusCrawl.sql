@@ -7,7 +7,8 @@ ID integer PRIMARY KEY,
 name varchar(50),
 latitude float,
 longitude float,
-description text
+description text,
+image text
 );
 
 CREATE TABLE Tour (
