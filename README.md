@@ -1,4 +1,4 @@
-# campusCrawl-service
+# Campus Crawl Service
 This is the data service application for Team B's CS 262 Campus Crawl project.
 
 The database is relational with the schema specified in the sql/ sub-directory.
