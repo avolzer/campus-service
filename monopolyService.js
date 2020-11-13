@@ -62,7 +62,7 @@ function readHelloMessage(req, res) {
 }
 
 function readLocations(req, res, next) {
-    db.many("SELECT * FROM Locations")
+    db.many("SELECT * FROM Location")
         .then(data => {
             res.send(data);
         })
