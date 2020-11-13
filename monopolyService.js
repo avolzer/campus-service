@@ -28,13 +28,7 @@ const router = express.Router();
 router.use(express.json());
 
 router.get("/", readHelloMessage);
-router.get("/players", readLocations);
-// router.get("/players", readPlayers);
-// router.get("/players/:id", readPlayer);
-// router.get("/players/:id/scores", readPlayerScores);
-// router.put("/players/:id", updatePlayer);
-// router.post('/players', createPlayer);
-// router.delete('/players/:id', deletePlayer);
+router.get("/locations", readLocations);
 
 app.use(router);
 app.use(errorHandler);
@@ -71,62 +65,4 @@ function readLocations(req, res, next) {
         })
 }
 
-// function readPlayers(req, res, next) {
-//     db.many("SELECT * FROM Player")
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             next(err);
-//         })
-// }
 
-// function readPlayerScores(req, res, next) {
-//   db.many(`SELECT gameID, score FROM Player, PlayerGame WHERE Player.ID = playerID AND Player.id=${req.params.id}`)
-//     .then(data => {
-//       returnDataOr404(res, data);
-//     })
-//     .catch(err => {
-//       next(err);
-//     });
-// }
-
-// function readPlayer(req, res, next) {
-//     db.oneOrNone(`SELECT * FROM Player WHERE id=${req.params.id}`)
-//         .then(data => {
-//             returnDataOr404(res, data);
-//         })
-//         .catch(err => {
-//             next(err);
-//         });
-// }
-
-// function updatePlayer(req, res, next) {
-//     db.oneOrNone(`UPDATE Player SET email=$(email), name=$(name) WHERE id=${req.params.id} RETURNING id`, req.body)
-//         .then(data => {
-//             returnDataOr404(res, data);
-//         })
-//         .catch(err => {
-//             next(err);
-//         });
-// }
-
-// function createPlayer(req, res, next) {
-//     db.one(`INSERT INTO Player(email, name) VALUES ($(email), $(name)) RETURNING id`, req.body)
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             next(err);
-//         });
-// }
-
-// function deletePlayer(req, res, next) {
-//     db.oneOrNone(`DELETE FROM Player WHERE id=${req.params.id} RETURNING id`)
-//         .then(data => {
-//             returnDataOr404(res, data);
-//         })
-//         .catch(err => {
-//             next(err);
-//         });
-// }
