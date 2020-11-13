@@ -1,1 +1,1 @@
-web: node CampusCrawlService.js
+web: node campusCrawlService.js
