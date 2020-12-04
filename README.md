@@ -13,3 +13,4 @@ The database is relational with the schema specified in the `sql/` sub-directory
  and is hosted on [ElephantSQL](https://www.elephantsql.com/). The database user
 and password are stored as Heroku configuration variables rather than in this (public) repo.
  
+The Campus Crawl client repo can be found [here](github.com/calvin-cs262-fall2020-teamb/campusCrawl-client) and the project resources are [here]( github.com/calvin-cs262-fall2020-teamb/campusCrawl-project)
