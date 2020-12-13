@@ -31,7 +31,7 @@ router.get("/locations", readLocations);
 router.get("/locations/:id", readLocation);
 router.post("/tour", createTour);
 router.put("/locations/:id", updatePlayer);
-router.delete("/tourstop/:tour/:stopnumber", deleteStop);
+router.delete("/tourstop/:tourid/:stopnumber", deleteStop);
 
 app.use(router);
 app.use(errorHandler);
@@ -99,7 +99,7 @@ function updateLocation(req, res, next) {
 }
 
 function deleteStop(req, res, next) {
-    db.oneOrNone(`DELETE FROM tourstop WHERE tour=${req.params.tour} AND stopnumber=$(req.params.stopnumber) RETURNING id`)
+    db.oneOrNone(`DELETE FROM tourstop WHERE tourid=${req.params.tourid} AND stopnumber=$(req.params.stopnumber) RETURNING id`)
         .then(data => {
             returnDataOr404(res, data);
         })
