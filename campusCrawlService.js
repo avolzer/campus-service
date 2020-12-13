@@ -30,8 +30,8 @@ router.get("/", readHelloMessage);
 router.get("/locations", readLocations);
 router.get("/locations/:id", readLocation);
 router.post("/tour", createTour);
-router.put("/locations/:id", updatePlayer);
-router.delete("/tourstop/:tourid/:stopnumber", deleteStop);
+// router.put("/locations/:id", updatePlayer);
+// router.delete("/tourstop/:tourid/:stopnumber", deleteStop);
 
 app.use(router);
 app.use(errorHandler);
@@ -88,22 +88,22 @@ function createTour(req, res, next) {
         });
 }
 
-function updateLocation(req, res, next) {
-    db.oneOrNone(`UPDATE Location SET name=$(name), latitude=$(latitude), longitude=$(longitude), description=$(description), greeting=$(greeting), image=$(image) WHERE id=${req.params.id} RETURNING id`, req.body)
-        .then(data => {
-            returnDataOr404(res, data);
-        })
-        .catch(err => {
-            next(err);
-        });
-}
+// function updateLocation(req, res, next) {
+//     db.oneOrNone(`UPDATE Location SET name=$(name), latitude=$(latitude), longitude=$(longitude), description=$(description), greeting=$(greeting), image=$(image) WHERE id=${req.params.id} RETURNING id`, req.body)
+//         .then(data => {
+//             returnDataOr404(res, data);
+//         })
+//         .catch(err => {
+//             next(err);
+//         });
+// }
 
-function deleteStop(req, res, next) {
-    db.oneOrNone(`DELETE FROM tourstop WHERE tourid=${req.params.tourid} AND stopnumber=$(req.params.stopnumber) RETURNING id`)
-        .then(data => {
-            returnDataOr404(res, data);
-        })
-        .catch(err => {
-            next(err);
-        });
-}
+// function deleteStop(req, res, next) {
+//     db.oneOrNone(`DELETE FROM tourstop WHERE tourid=${req.params.tourid} AND stopnumber=$(req.params.stopnumber) RETURNING id`)
+//         .then(data => {
+//             returnDataOr404(res, data);
+//         })
+//         .catch(err => {
+//             next(err);
+//         });
+// }
