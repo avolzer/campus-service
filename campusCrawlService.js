@@ -1,19 +1,18 @@
+
+ 
 /**
- * This module implements a REST-inspired webservice for the Monopoly DB.
+ * This module implements a REST-inspired webservice for the Campus Crawl DB.
  * The database is hosted on ElephantSQL.
  *
- * Currently, the service supports the player table only.
- *
- * @author: kvlinden
- * @date: Summer, 2020
+ * @author: avolzer
+ * @date: Fall, 2020
  */
 
 // Set up the database connection.
-
 const pgp = require('pg-promise')();
 const db = pgp({
     host: process.env.HOST,
-    port: 5432,
+    port: process.env.PORT,
     database: process.env.USER,
     user: process.env.USER,
     password: process.env.PASSWORD
@@ -29,6 +28,8 @@ router.use(express.json());
 
 router.get("/", readHelloMessage);
 router.get("/locations", readLocations);
+router.get("/locations/:id", readLocation);
+router.post("/tour", createTour);
 
 app.use(router);
 app.use(errorHandler);
@@ -36,7 +37,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // Implement the CRUD operations.
 
-function errorHandler(err, req, res, next) {
+function errorHandler(err, req, res) {
     if (app.get('env') === "development") {
         console.log(err);
     }
@@ -52,7 +53,7 @@ function returnDataOr404(res, data) {
 }
 
 function readHelloMessage(req, res) {
-    res.send('Hello, campus crawl!');
+    res.send('Team B data service');
 }
 
 function readLocations(req, res, next) {
@@ -65,4 +66,22 @@ function readLocations(req, res, next) {
         })
 }
 
+function readLocation(req, res, next) {
+    db.oneOrNone('SELECT * FROM Location WHERE id=${id}', req.params)
+        .then(data => {
+            returnDataOr404(res, data);
+        })
+        .catch(err => {
+            next(err);
+        });
+}
 
+function createTour(req, res, next) {
+    db.one(`INSERT INTO tour(name, password) VALUES ($(name), $(password)) RETURNING id`, req.body)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        });
+}
